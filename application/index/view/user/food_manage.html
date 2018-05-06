@@ -1,0 +1,134 @@
+{extend name="layout/base" }
+{block name="style"}
+<link href="/assets/css/user.css" rel="stylesheet">
+<style>
+    table tr {
+        margin-bottom: 10px;
+        line-height: 50px;
+    }
+</style>
+{/block}
+{block name="content-body"}
+
+<div class="detail">
+    <div class="am-g am-g-fixed">
+
+        <div class="am-u-lg-9 br_tp_g am-padding-horizontal-xs">
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg">
+                <div class="am-container am-padding-horizontal-0">
+                    <ol class="am-breadcrumb br_bt">
+                        <li><a href="#" class="">Health Center</a></li>
+                        <li><a href="#" class="">Food manage</a></li>
+                    </ol>
+                </div>
+
+
+                <div class="clear"></div>
+                <div style="width:785px;margin:1em auto;" class="fr">
+                    <form name="formEdit" id="formEdit" action="{:url('index/user/food_manage')}" enctype="multipart/form-data"
+                          onsubmit="return foodEdit()" class="am-form am-form-horizontal" method="post">
+
+                        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                            <tbody>
+                            <tr>
+                                <td width="20%" align="right" bgcolor="#FFFFFF" height="25">Food Name：</td>
+                                <td width="80%" align="left" bgcolor="#FFFFFF">
+                                    <input name="foodName" type="text" value="{$info.foodName|default=''}" size="25" class="border1"></td>
+                            </tr>
+
+                            <tr>
+                                <td align="right" bgcolor="#FFFFFF" height="25">HealthyLevel：</td>
+                                <td align="left" bgcolor="#FFFFFF">
+                                    <select id="healthyLevel" name="healthyLevel" style="width:150px">
+                                        <option value="0" {if condition="$info['healthyLevel'] eq 0 || $info['healthyLevel'] eq '' "}selected{/if}>Default</option>
+                                        <option value="4" {if condition="$info['healthyLevel'] eq 4 "}selected{/if}>Healthiest</option>
+                                        <option value="3" {if condition="$info['healthyLevel'] eq 3 "}selected{/if}>Healthy</option>
+                                        <option value="2" {if condition="$info['healthyLevel'] eq 2 "}selected{/if}>Unhealthy</option>
+                                        <option value="1" {if condition="$info['healthyLevel'] eq 1 "}selected{/if}>Unhealthiest</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" bgcolor="#FFFFFF" height="25">Protein：</td>
+                                <td align="left" bgcolor="#FFFFFF">
+                                    <input name="protein" type="text" value="{$info.protein|default=''}" size="25" class="border1"></td>
+                            </tr>
+                            <tr>
+                                <td align="right" bgcolor="#FFFFFF" height="25">Fat：</td>
+                                <td align="left" bgcolor="#FFFFFF">
+                                    <input name="fat" type="text" value="{$info.fat|default=''}" class="border1" size="25">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" bgcolor="#FFFFFF" height="25">Fiber：</td>
+                                <td align="left" bgcolor="#FFFFFF">
+                                    <input name="fiber" type="text" value="{$info.fiber|default=''}" class="border1" size="25">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" bgcolor="#FFFFFF" height="25">Sugar：</td>
+                                <td align="left" bgcolor="#FFFFFF">
+                                    <input name="sugar" type="text" value="{$info.sugar|default=''}" class="border1" size="25">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" bgcolor="#FFFFFF" height="25">Food Pic：</td>
+                                <td align="left" bgcolor="#FFFFFF">
+                                    <!--<input type="file" name="file" value="" size="25" >-->
+
+                                    <input type="file"  name="file" id="attachment" style="display:none;width:268px; *height:22px;" onchange="jQuery('#path').val(jQuery('#attachment').val())" />
+                                    <input type="text" name="path" id="path" onfocus="jQuery('#attachment').click()" />
+                                    <input type="button" value="Upload" onclick="jQuery('#attachment').click()" />
+
+                                    <input name="picpath" value="{$info.picpath|default=''}" type="hidden" />
+                                    (Support JPG, GIF, png)<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" bgcolor="#FFFFFF" height="25">Description：</td>
+                                <td align="left" bgcolor="#FFFFFF">
+                                    <textarea name="description" class="" rows="5" id="doc-ta-1">{$info.description|default=''}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center" bgcolor="#FFFFFF" height="25">
+                                    <input name="foodId" type="hidden" value="{$info.foodId|default=''}" class="border1" size="25">
+                                    <input name="submit" type="submit" value="Submit">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="am-u-lg-3 am-padding-right-0">
+            <div class="am-container br_lf br_rg br_bt br_tp_g am-text-center am-padding-sm">
+                {include file="user/rightmenu" /}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+    function foodEdit(){
+        var name = $("input[name='foodName']").val(),
+            level = $("#healthyLevel").find("option:selected").val();
+        if(name.length == 0){
+            layer.msg('Food Name not Empty');
+            return false;
+        }
+        if(level == 0){
+            layer.msg('Please select one item');
+            return false;
+        }
+        $('#formEdit').submit();
+
+        // Tools.Ajax('POST','/login','login_form','/user/');
+
+    }
+</script>
+{/block}

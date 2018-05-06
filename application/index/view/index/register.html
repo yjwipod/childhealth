@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js"> <!--<![endif]-->
+{extend name="layout/base" }
+{block name="style"}
+<style>
+    .form-box {
+        width: 300px;
+        margin: 0 auto;
+        padding: 30px 0;
+        padding-bottom: 120px;
+    }
+
+    .form-box .item {
+        margin-top: 20px;
+    }
+
+    .form-box .item input {
+        height: 40px;
+        width: 100%;
+        border: 1px solid #ccc;
+        text-indent: 10px;
+    }
+
+    .mt-btn {
+        display: inline-block;
+        background: #ff5402;
+        color: #fff;
+        padding: 10px 20px;
+    }
+
+    .mt-btn:hover {
+        color: #fff;
+    }
+
+    .mt-btn-block {
+        display: block;
+        text-align: center;
+    }
+
+    .img-code {
+        vertical-align: middle;
+        height: 41px;
+    }
+
+    #imgcode {
+        width: 160px;
+        top: 1px;
+        right: -5px;
+        position: relative;
+    }
+</style>
+{/block}
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="Aviato E-Commerce Template">
+  
+  <meta name="author" content="Themefisher.com">
+
+  <title>Fit-Kidz</title>
+
+  <!-- Mobile Specific Meta-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="/assets/css/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Ionic Icon Css -->
+  <link rel="stylesheet" href="/assets/css/plugins/Ionicons/css/ionicons.min.css">
+  <!-- animate.css -->
+  <link rel="stylesheet" href="/assets/css/plugins/animate-css/animate.css">
+  <!-- Magnify Popup -->
+  <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/dist/magnific-popup.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="/assets/css/plugins/slick-carousel/slick/slick.css">
+  <link rel="stylesheet" href="/assets/css/plugins/slick-carousel/slick/slick-theme.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body id="body">
+
+<section class="page-title bg-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+          <h1>Register</h1>
+          <p>Create an ccout with us to avail all our free features.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- contact form start -->
+<section class="contact-form">
+
+<!--{block name="content-body"}-->
+<div class="detail">
+    <form action="chkLogin.html" id="reg_form" name="reg_form" method="POST">
+        <div class="register">
+            <div class="form-box">
+               <!-- <h1 class="logo"> Register</h1>
+                 <div class="item">
+                    <input id="email" type="text" placeholder="邮箱">
+                </div> -->
+                <div class="item">
+                    <input id="account" name="account" type="text" placeholder="account">
+                </div>
+                <div class="item">
+                    <input id="email" name="email" type="text" placeholder="email">
+                </div>
+
+                <div class="am-form-group" style="margin-top: 10px">
+
+                    <label class="am-radio-inline">
+                        <input type="radio" class="sex" name="sex" value="0" style="width:20px" checked="checked">Boy
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio"  class="sex" name="sex" value="1" style="width:20px">Girl
+                    </label>
+                </div>
+
+                <div class="item">
+                    <img id="avatar" src="/assets/image/timg.jpg" width="50px"/>
+                </div>
+
+                <div class="item">
+                    <input id="password" name="password" type="password" placeholder="password">
+                </div>
+                <div class="item">
+                    <input id="repassword" name="repassword" type="password" placeholder="comfirm password">
+                </div>
+
+                <div class="item">
+                    <img class="img-code captcha" src="{:url('/index/index/verify')}" alt="verify code" id="re_butid"
+                         onclick="re_verify()"/>
+                    <input id="imgcode" name="imgcode" type="text" placeholder="enter verify code">
+                </div>
+                <div class="item">
+                    <a id="registerBtn" class="mt-btn mt-btn-block">Register</a>
+                </div>
+                <div class="item">
+                    Had Account？ <a href="{:url('/login')}">GO Login</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--{/block}-->
+</section>
+<!-- footer Start -->
+<footer class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="footer-manu">
+					<ul>
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">Contact us</a></li>
+						<li><a href="#">How it works</a></li>
+						<li><a href="#">Support</a></li>
+						<li><a href="#">Terms</a></li>
+					</ul>
+				</div>
+				<p class="copyright">Copyright 2018 &copy; Design & Developed by <a href="http://www.themefisher.com">themefisher.com</a>. All rights reserved.
+					<br>
+					Get More <a href="https://themefisher.com/free-bootstrap-templates/" target="_blank">Free Bootstrap Templates</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    
+    <!-- <script src="js/jquery.counterup.js"></script> -->
+    
+    <!-- Main jQuery -->
+{block name="script"}
+	<script type="text/javascript">
+		function re_verify() {
+			$('.captcha').attr('src', "{:url(\'/index/index/verify\')}&r=" + Math.random());
+		}
+
+		$(document).ready(function () {
+
+			$("#registerBtn").click(function () {
+				userRegister.saveInfo();
+			});
+
+		});
+	</script>
+	<script>
+		$(function() {
+			$('#doc-form-file').on('change', function() {
+				var fileNames = '';
+				$.each(this.files, function() {
+					fileNames += '<span class="am-badge">' + this.name + '</span> ';
+				});
+				$('#file-list').html(fileNames);
+			});
+			$('.sex').click(function(){
+				if( $("input[name='sex']:checked").val() == 0 ){
+					$("#avatar").attr('src','/assets/image/timg.jpg');
+				}else{
+					$("#avatar").attr('src','/assets/image/ftimg.jpg');
+				}
+			});
+		});
+	</script>
+{/block}
+   
+    <script src="https://code.jquery.com/jquery-git.min.js"></script>
+    <!-- Bootstrap 3.1 -->
+    <script src="/assets/css/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Owl Carousel -->
+    <script src="/assets/css/plugins/slick-carousel/slick/slick.min.js"></script>
+    <!--  -->
+    <script src="/assets/css/plugins/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <!-- Mixit Up JS -->
+    <script src="/assets/css/plugins/mixitup/dist/mixitup.min.js"></script>
+    <!-- <script src="plugins/count-down/jquery.lwtCountdown-1.0.js"></script> -->
+    <script src="/assets/css/plugins/SyoTimer/build/jquery.syotimer.min.js"></script>
+
+
+    <!-- Form Validator -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+
+
+    
+    <!-- Google Map -->
+   <!-- <script src="plugins/google-map/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    -->
+
+    <script src="/assets/js/script.js"></script>
+    
+
+
+
+  </body>
+  </html>

@@ -1,0 +1,106 @@
+{extend name="layout/base" }
+{block name="style"}
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<link href="/assets/css/health.css" rel="stylesheet">
+
+<!--<link href="/assets/css/health/css.css" rel="stylesheet"/>-->
+
+<script src="/assets/js/health/modernizr.js"></script>
+<style>
+
+
+</style>
+{/block}
+{block name="content-body"}
+<div class="detail">
+
+    <div class="am-g am-g-fixed detail_bg" >
+        <div  id='tips' >
+            <p >游戏简介</p>
+        </div>
+        <div class="game_zoom" >
+            <div id="foodRankingPlayground" , class="foodRankingPlayground">
+
+                <div id="imgHest" class="foodImg">
+                    <img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/apple11.png"/>
+                </div>
+                <div id="imgHeal" class="foodImg">
+                    <img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/Salmon11.png"/>
+                </div>
+                <!--<div id="imgNorm" class="foodImg">-->
+                    <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/biscuit11.png"/>-->
+                <!--</div>-->
+                <div id="imgUnh" class="foodImg">
+                    <img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/cocacola11.png"/>
+                </div>
+                <div id="imgUnhest" class="foodImg">
+                    <img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/burger11.png"/>
+                </div>
+
+                <table id="foodLevel" class="tableDrop">
+                    <tr>
+                        <td>
+                            <div id="hec" class="correctdiv">Correct</div>
+                        </td>
+                        <td>
+                            <div id="hc" class="correctdiv">Correct</div>
+                        </td>
+                        <!--<td>-->
+                            <!--<div id="noc" class="correctdiv">Correct</div>-->
+                        <!--</td>-->
+                        <td>
+                            <div id="uhc" class="correctdiv">Correct</div>
+                        </td>
+                        <td>
+                            <div id="uhec" class="correctdiv">Correct</div>
+                        </td>
+                    </tr>
+                    <tr class="tableDropSlotRow">
+                        <td id="hest">
+                            <div id="slotHest" class="tableDropSlot"></div>
+                        </td>
+                        <td id="heal">
+                            <div id="slotHeal" class="tableDropSlot"></div>
+                        </td>
+                        <!--<td id="norm">-->
+                            <!--<div id="slotNorm" class="tableDropSlot"></div>-->
+                        <!--</td>-->
+                        <td id="unhea">
+                            <div id="slotUnh" class="tableDropSlot"></div>
+                        </td>
+                        <td id="unhest">
+                            <div id="slotUnhest" class="tableDropSlot"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px;">Healthiest</td>
+                        <td style="font-size: 20px;">Healthy</td>
+                        <!--<td style="font-size: 20px;">Normal</td>-->
+                        <td style="font-size: 20px;">Unhealthy</td>
+                        <td style="font-size: 20px;">Unhealthiest</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div  id='w_tips' style="height: 50px; width:420px; border:solid 1px #000000;background: #b2d6ef;margin:15px auto  ; ">
+                                <p style="text-align: center;line-height: 50px;">错误显示</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{/block}
+{block name="script"}
+<script src="/assets/js/health/jquery_drop.js"></script>
+
+<script src="/assets/js/health/bootstrap.js"></script>
+
+<script src="/assets/js/drag&drop.js"></script>
+{/block}
+

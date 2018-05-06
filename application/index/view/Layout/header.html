@@ -1,0 +1,59 @@
+<header class="navigation">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- header Nav Start -->
+				<nav class="navbar">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							</button>
+							<!--<a class="navbar-brand" href="{:url('/')}">
+								<img src="assets/image/logo.png" alt="Logo">
+							</a>-->
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right">
+								<li {if condition="$action eq 'index' && $controller neq 'User' "} class="am-active" {/if}
+									><a  href="{:url('/')}">Home</a>
+								</li>
+								<li {if condition="$action eq 'introduction'"} class="am-active" {/if}>
+									<a href="{:url('/introduction')}" >FAQ</a>
+								</li>
+								<li {if condition="$action eq 'health'"} class="am-active" {/if}>
+									<a href="{$site_info.health_url}" >Game</a>
+								</li>
+								<!--<li {if condition="$action eq 'reg'"} class="am-active" {/if}>-->
+								<li>	
+									<a href="{$site_info.about_url}" >About Us</a>
+								<!--</li>-->
+								</li>
+
+
+								<?php   if($user_id == 0){?>
+								<li {if condition="$action eq 'reg'"} class="am-active" {/if}>
+									<a href="{$site_info.reg_url}" >Sign up</a>
+								</li>
+								<li {if condition="$action eq 'login'"} class="am-active" {/if}>
+									<a href="{$site_info.login_url}" >Login</a>
+								</li>
+								<?php }else{ ?>
+								<li {if condition="$action eq 'index' && $controller eq 'User' "} class="am-active" {/if}>
+								<a href="{:url('/user/'.$user_id)}" target="new"  > Welcome {:$user_info.user_name} </a></li>
+								<li ><a href="{$site_info.logout_url}"><i class="am-icon-sign-out am-icon-sm"></i> Log out</a> </li>
+								<?php } ?>
+							
+							</ul>
+							</div><!-- /.navbar-collapse -->
+							</div><!-- /.container-fluid -->
+						</nav>
+					</div>
+				</div>
+			</div>
+			</header><!-- header close -->

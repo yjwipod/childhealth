@@ -1,0 +1,32 @@
+{extend name="layout/base_notfooter" }
+{block name="style"}
+<style>
+    .am-with-topbar-fixed-top{ padding-top: 0px !important}
+</style>
+{/block}
+{block name="content-body"}
+
+<div class="detail" >
+    <iframe src="{:url('index/index/home')}" width="100%" frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)"></iframe>
+    <!--<div class="am-g am-container" style="text-align: center;padding: 10px 0">-->
+        <!--<img src="/assets/image/muzi-003.jpg" width="80%;" />-->
+    <!--</div>-->
+</div>
+
+{/block}
+{block name="script"}
+<script>
+    function setIframeHeight(iframe) {
+        if (iframe) {
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if (iframeWin.document.body) {
+                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+            }
+        }
+    };
+
+    window.onload = function () {
+        setIframeHeight(document.getElementById('external-frame'));
+    };
+</script>
+{/block}

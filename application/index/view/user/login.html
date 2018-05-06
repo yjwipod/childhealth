@@ -1,0 +1,84 @@
+{extend name="layout/base" }
+{block name="style"}
+<style>
+    /*  注册  */
+    /*  登录 */
+    .form-box {
+        width: 300px;
+        margin: 0 auto;
+        padding: 60px 0;
+        padding-bottom: 120px; }
+    .form-box .item {
+        margin-top: 20px; }
+    .form-box .item input {
+        height: 40px;
+        width: 100%;
+        border: 1px solid #ccc;
+        text-indent: 10px; }
+    .mt-btn {
+        display: inline-block;
+        background: #ff5402;
+        color: #fff;
+        padding: 10px 20px; }
+    .mt-btn:hover {
+        color: #fff; }
+    .mt-btn-block {
+        display: block;
+        text-align: center; }
+    .img-code {
+        vertical-align: middle;
+        height: 41px; }
+    #imgcode {
+        width: 160px;
+        top: 1px;
+        right: -5px;
+        position: relative; }
+</style>
+{/block}
+{block name="content-body"}
+
+<div class="detail">
+    <form action="chkLogin.html" id="login_form" name="reg_form" method="POST">
+        <div class="register">
+            <div class="form-box">
+                <h1 class="logo"> Login</h1>
+                <!-- <div class="item">
+                    <input id="email" type="text" placeholder="邮箱">
+                </div> -->
+                <div class="item">
+                    <input id="account" name="account" type="text" placeholder="account">
+                </div>
+                <div class="item">
+                    <input id="password"  name="password"  type="password" placeholder="password">
+                </div>
+
+                <div class="item">
+                    <img class="img-code captcha"  src="{:url('/index/index/verify')}" alt="verify code" id="re_butid" onclick="re_verify()" />
+                    <input id="imgcode"  name="imgcode"  type="text" placeholder="enter verify code">
+                </div>
+                <div class="item">
+                    <a id="registerBtn" class="mt-btn mt-btn-block">Login</a>
+                </div>
+                <div class="item">
+                    No Account？ <a href="{:url('/reg')}">Go regist</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+    function re_verify(){
+        $('.captcha').attr('src',"{:url(\'/index/index/verify\')}&r="+Math.random());
+    }
+
+    $(document).ready(function(){
+
+        $("#registerBtn").click(function(){
+            memberLogin.ajaxLogin();
+        });
+
+    });
+</script>
+{/block}

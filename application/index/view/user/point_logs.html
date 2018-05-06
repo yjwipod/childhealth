@@ -1,0 +1,66 @@
+{extend name="layout/base" }
+{block name="style"}
+<link href="/assets/css/user.css" rel="stylesheet">
+<style>
+    table tr {
+        margin-bottom: 10px;
+        line-height: 50px;
+    }
+</style>
+{/block}
+{block name="content-body"}
+
+<div class="detail">
+    <div class="am-g am-g-fixed">
+
+        <div class="am-u-lg-9 br_tp_g am-padding-horizontal-xs">
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg">
+                <div class="am-container am-padding-horizontal-0">
+                    <ol class="am-breadcrumb br_bt">
+                        <li><a href="#" class="">Health Center</a></li>
+                        <li><a href="#" class="">Point logs</a></li>
+                    </ol>
+                </div>
+
+
+                <div class="clear"></div>
+                <div style="width:785px;margin:1em auto;" class="fr">
+
+                    <table class="am-table am-table-bordered am-table-striped am-table-hover">
+                        <thead>
+                        <tr>
+                            <th>Point</th>
+                            <th>Times</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {volist name='lists' id='vo'}
+                        <tr>
+                            <td>{:$vo.point}</td>
+                            <td>
+                                <?php echo date("Y-m-d H:i:s",$vo['createtime']) ;?>
+                            </td>
+
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+
+                    {:$lists->render()}
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="am-u-lg-3 am-padding-right-0">
+            {include file="user/rightmenu" /}
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+
+</script>
+{/block}

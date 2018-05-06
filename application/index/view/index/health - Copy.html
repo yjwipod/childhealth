@@ -1,0 +1,251 @@
+{extend name="layout/base_health" }
+{block name="style"}
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box-wrapper {
+        height: 500px;
+        width: 100%;
+        /* background-color: #e69e9e; */
+    }
+
+    .wrapper {
+        margin: 0 auto;
+        width: 480px;
+        height: 100px;
+        /* position: relative; */
+    }
+
+    .wrapper .box {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        font-size: 20px;
+        position: absolute;
+    }
+
+    .wrapper .box:hover {
+        z-index: 10;
+        transform: rotate(0);
+    }
+
+    .line-wrapper {
+        height: 200px;
+    }
+
+    .line-box {
+        margin: 0 auto;
+        width: 510px;
+    }
+
+    .line-box .box {
+        width: 100px;
+        height: 100px;
+        float: left;
+    }
+
+    .line-box .box .box {
+        transform: rotate(0deg) !important;
+    }
+
+    #b1 {
+        left: 60%;
+        top: 50px;
+        transform: rotate(48deg);
+        background-color: #ecc5c5;
+    }
+
+    #b2 {
+        left: 38%;
+        top: 50px;
+        transform: rotate(20deg);
+        background-color: #da9b9b;
+    }
+
+    #b3 {
+        left: 46%;
+        top: 65px;
+        transform: rotate(-24deg);
+        background-color: #b5e4f3;
+    }
+
+    #b4 {
+        left: 55%;
+        top: 100px;
+        transform: rotate(14deg);
+        background-color: #6dc3de;
+    }
+
+    #b5 {
+        left: 40%;
+        top: 145px;
+        transform: rotate(5deg);
+        background-color: #c2efbc;
+    }
+
+    #b6 {
+        left: 51%;
+        top: 145px;
+        transform: rotate(-5deg);
+        background-color: #c5c5e2;
+    }
+</style>
+{/block}
+{block name="content-body"}
+<div class="box-wrapper">
+    <div class="wrapper">
+        <!--<div class="box" id="b1"></div>-->
+        {volist name='list' id='vo'}
+        <div class="box"  style="top:{:$vo['top']}px;background: url('{:$vo.picpath}'); width: 100px ; height: 100px" id="b<?php echo $key+2?>" ></div>
+        {/volist}
+        <!--<div class="box" id="b2"></div>-->
+        <!--<div class="box" id="b3"></div>-->
+        <!--<div class="box" id="b4"></div>-->
+        <!--<div class="box" id="b5"></div>-->
+        <!--<div class="box" id="b6"></div>-->
+    </div>
+</div>
+<div class="line-wrapper">
+    <div class="line-box">
+        <div class="box" data-id="b2">1</div>
+        <div class="box" data-id="b3">2</div>
+        <div class="box" data-id="b4">3</div>
+        <div class="box" data-id="b6">4</div>
+        <div class="box" data-id="b5">5</div>
+    </div>
+</div>
+<div style="text-align: center">Remaining times：
+    <span class="tims" style="font-size: 28px">10</span>
+    <input id="note" value="0" type="hidden" />
+</div>
+
+<input id="times" value="10" type="hidden" />
+{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(".box").click(function(){
+        checkIsRight();
+        if($('#times').val() <= 0){
+            layer.msg('Use out of times');
+            return false;
+        }
+    });
+    function checkIsRight(){
+        var str1 = 0 ;
+         $(".wrapper").find('div').each(function(i, v) {
+             var str = $(this).css('top').split("px") ;
+             str1 = str1+ parseInt(str[0]);
+        });
+         if(str1 == 2500){
+             layer.msg('Congratulations on the right operation');
+             return false;
+         }
+        console.log(str1);
+    }
+    var colors = ["#da9b9b", "#b5e4f3", "#6dc3de", "#c5c5e2", "#c2efbc"];
+    $(".line-box .box").each(function(i, v) {
+        var div = $(this);
+        div.css("background-color", colors[i])
+    });
+    var drag = function(obj) {
+        obj.bind("mousedown", start);
+        var boxPoints = {},
+            transform ="",
+            height,
+            width;
+        function start(event) {
+            //判断是否超出次数
+            if($('#times').val() <= 0){
+                layer.msg('Use out of times');
+                return false;
+            }
+            $('#note').val(1);
+            if (event.button == 0) {
+                var that = $(event.target.id),
+                    id = event.target.id,
+                    top = event.target.offsetTop,
+                    left = event.target.offsetLeft,
+                    item = {};
+                item.x = left;
+                item.y = top;
+                boxPoints[id] = item;
+                transform = event.target.style.transform;
+                width = event.target.offsetWidth;
+                height = event.target.offsetHeight;
+                event.target.style.opacity = '0.5';
+                gapX = event.clientX - obj[0].offsetLeft;
+                gapY = event.clientY - obj[0].offsetTop;
+                $(document).bind("mousemove", move);
+                $(obj).bind("mouseup", stop);
+
+            }
+            return false;
+        }
+
+        function move(event) {
+            obj.css({
+                "left": (event.clientX - gapX) + "px",
+                "top": (event.clientY - gapY) + "px"
+            });
+            return false;
+        }
+
+        function stop(event) {
+
+            $(document).unbind("mousemove", move);
+            $(document).unbind("mouseup", stop);
+            event.target.style.opacity = '1';
+            var id = event.target.id,
+                point = lineBoxPoint[id],
+                point1 = boxPoints[id];
+            if (point) {
+                if($("#note").val() == 1){
+                    var times = $('#times').val();
+                    $("#times").val(times-1);
+                    $(".tims").text(times-1);
+                    $("#note").val(0);
+                }
+                if (event.clientX > point.x && event.clientX < point.x + width && event.clientY > point.y && event.clientY < point.y + height) {
+                    //alert(111);//放对位置
+                    $(this).css({
+                        "left": point.x + "px",
+                        "top": point.y + "px",
+                        "transform": "rotate(0)"
+                    });
+
+                    return false
+                }
+            }
+            $(this).css({
+                "left": point1.x + "px",
+                "top": point1.y + "px",
+            });
+
+            return false
+        }
+    };
+    var lineBoxPoint = {};
+    $(".line-box .box").each(function(i, v) {
+        var that = $(v),
+            id = that.data("id"),
+            top = that.offset().top,
+            left = that.offset().left,
+            item = {};
+        item.x = left;
+        item.y = top;
+        lineBoxPoint[id] = item
+    });
+
+    $(".wrapper .box").each(function(i, v) {
+        (function(dom) {
+            drag($(dom));
+        })(v)
+    })
+</script>
+{/block}

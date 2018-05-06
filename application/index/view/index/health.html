@@ -1,0 +1,242 @@
+<!--<!DOCTYPE html>-->
+<!--&lt;!&ndash;[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]&ndash;&gt;-->
+<!--&lt;!&ndash;[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]&ndash;&gt;-->
+<!--&lt;!&ndash;[if IE 8]>         <html class="no-js lt-ie9"> <![endif]&ndash;&gt;-->
+<!--&lt;!&ndash;[if gt IE 8]>&lt;!&ndash;> -->
+<!--<html class="no-js"> &lt;!&ndash;<![endif]&ndash;&gt;-->
+{extend name="layout/base" }
+{block name="style"}
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="Aviato E-Commerce Template">
+  
+  <meta name="author" content="Themefisher.com">
+
+  <title>Fit-Kidz</title>
+
+  <!-- Mobile Specific Meta-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="/assets/css/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Ionic Icon Css -->
+  <link rel="stylesheet" href="/assets/css/plugins/Ionicons/css/ionicons.min.css">
+  <!-- animate.css -->
+  <link rel="stylesheet" href="/assets/css/plugins/animate-css/animate.css">
+  <!-- Magnify Popup -->
+  <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/dist/magnific-popup.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="/assets/css/plugins/slick-carousel/slick/slick.css">
+  <link rel="stylesheet" href="/assets/css/plugins/slick-carousel/slick/slick-theme.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+{/block}
+{block name="style"}
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<link href="/assets/css/health.css" rel="stylesheet">
+
+<!--<link href="/assets/css/health/css.css" rel="stylesheet"/>-->
+
+<script src="/assets/js/health/modernizr.js"></script>
+<script src="/assets/js/health/popup-title.js"></script>
+
+{/block}
+
+{block name="content-body"}
+<section class="page-title bg-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+          <h1>Food Ranking Game</h1>
+          <p>Rank your favorite foods and at the end of 6 rounds you will be allowed to select food recommendations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<<div class="detail">
+
+    <div class="detail_bg" >
+        <table style="margin-left:auto;margin-right:auto;">
+            <tr>
+
+                <td>
+                    <div id="roundImg" class="roundImg">
+                        <div id="round" class="gameRound">
+                            <?php if(isset($round) && $user_id != 0 ){ if($round < 7){ ?>
+                            <span style="color: red">{:$num}</span>
+                            <?php }else{?>
+                            <p class="haveFun">Have Fun</p>
+                            <?php } }else{ ?>
+                            <p class="haveFun">Have Fun</p>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </td>
+                <td style="width:200px"></td>
+                <td>
+                    <div id="tutorial" >
+                        <a class="layui-btn" method="notice" data-src="/assets/image/tips.png">
+                            <img border="0" src="../../assets/image/healthimg/tutorial.png"/>
+                        </a>
+                    </div>
+                </td>
+                <td style="width:200px"></td>
+                <td>
+                    <div id="timeImg" class="dragTimeImg">
+                        <div id="times" class="dragTimes">
+                            <span class="times" style="color: red">{:$level['wrong_times']}</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="game_zoom" style="position:relative;">
+
+            <div id="foodRankingPlayground"  class="foodRankingPlayground">
+                <table id="foodLevel" class="tableDrop">
+                    <tr>
+                        <td style="width: 300px;">
+                            <img src="../../assets/image/healthimg/healthiest.png"/>
+                            <br>
+                            <img src="../../assets/image/healthimg/drip.png"/>
+                        </td>
+                        <td style="width: 300px;">
+                            <img src="../../assets/image/healthimg/healthy.png"/>
+                            <br>
+                            <img src="../../assets/image/healthimg/drip.png"/>
+                        </td>
+                        <td style="width: 300px;">
+                            <img src="../../assets/image/healthimg/unhealthy.png"/>
+                            <br>
+                            <img src="../../assets/image/healthimg/drip.png"/>
+                        </td>
+                        <td style="width: 300px;">
+                            <img src="../../assets/image/healthimg/unhealthiest.png"/>
+                            <br>
+                            <img src="../../assets/image/healthimg/drip.png"/>
+                        </td>
+                    </tr>
+
+                    <tr class="tableDropSlotRow">
+                        <td class="tableCenter" id="hest">
+                            <div id="slotHest" class="tableDropSlot1"></div>
+                        </td>
+                        <!--<td style="width:28px"></td>-->
+                        <td class="tableCenter" id="heal">
+                            <div id="slotHeal" class="tableDropSlot1"></div>
+                        </td>
+                        <!--<td style="width:28px"></td>-->
+                        <td class="tableCenter" id="unhea">
+                            <div id="slotUnh" class="tableDropSlot1"></div>
+                        </td>
+                        <!--<td style="width:28px"></td>-->
+                        <td class="tableCenter" id="unhest">
+                            <div id="slotUnhest" class="tableDropSlot1"></div>
+                        </td>
+                    </tr>
+                    <!--<tr style="height:150px"></tr>-->
+                </table>
+
+                {volist name='list' id='vo'}
+                <div id="{:$healthyLevel[$vo['healthyLevel']]}" class="foodImg" data-dec = "{:$vo.description}" >
+                    <img  alt="AudioJungle" src="{:$vo.picpath}"/>
+                </div>
+                {/volist}
+
+                <table style="margin: auto;">
+                    <tr style="height:150px"></tr>
+                    <tr>
+                        <td colspan="4">
+                            <div  id='w_tips' class="description">
+                                <br>
+                                <!--style="height: 90px; width:760px; border:solid 1px #000000;background: #b2d6ef;margin:15px auto; ">-->
+                                <p class="desText"></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <input id="note" value="0" type="hidden" />
+</div>
+
+
+
+<!-- footer Start -->
+<footer class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="footer-manu">
+					<ul>
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">Contact us</a></li>
+						<li><a href="#">How it works</a></li>
+						<li><a href="#">Support</a></li>
+						<li><a href="#">Terms</a></li>
+					</ul>
+				</div>
+				<p class="copyright">Copyright 2018 &copy;</p> <!--Design & Developed by <a href="http://www.themefisher.com">themefisher.com</a>. All rights reserved.
+					<br>
+					Get More <a href="https://themefisher.com/free-bootstrap-templates/" target="_blank">Free Bootstrap Templates</a>
+				</p>-->
+			</div>
+		</div>
+	</div>
+</footer>
+
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    
+    <!-- <script src="js/jquery.counterup.js"></script> -->
+    
+    <!-- Main jQuery -->
+   
+    <script src="https://code.jquery.com/jquery-git.min.js"></script>
+    <!-- Bootstrap 3.1 -->
+    <script src="/assets/css/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Owl Carousel -->
+    <script src="/assets/css/plugins/slick-carousel/slick/slick.min.js"></script>
+    <!--  -->
+    <script src="/assets/css/plugins/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <!-- Mixit Up JS -->
+    <script src="/assets/css/plugins/mixitup/dist/mixitup.min.js"></script>
+    <!-- <script src="plugins/count-down/jquery.lwtCountdown-1.0.js"></script> -->
+    <script src="/assets/css/plugins/SyoTimer/build/jquery.syotimer.min.js"></script>
+
+
+    <!-- Form Validator -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+
+{/block}
+{block name="script"}
+<script src="/assets/js/health/jquery_drop.js"></script>
+
+<script src="/assets/js/health/bootstrap.js"></script>
+
+<script src="/assets/js/drag&drop.js"></script>
+<script>
+var user_id = "{:$user_id}";
+var times = "{:$times}";
+var wrong_times = "{:$level['wrong_times']}";
+
+</script>
+{/block}
+    
+    <!-- Google Map -->
+ <!--   <script src="plugins/google-map/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
+
+    <script src="js/script.js"></script> -->
+    

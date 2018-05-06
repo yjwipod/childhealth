@@ -1,0 +1,125 @@
+{extend name="layout/base" }
+{block name="style"}
+<link href="/assets/css/selectfood.css" rel="stylesheet">
+{/block}
+{block name="content-body"}
+
+<div class="detail">
+    <div class="am-g am-container" style="text-align: center;padding: 10px 0">
+        <div class="clearfix">
+            <!--<button class="select">&nbsp;</button>-->
+            <p class="sf">
+            <h1 style="margin-bottom: 0px">Choose food that you want to eat </h1>
+            <h2 style="padding: 0px;margin: 0px">(2 in total ,you can choose none)</h2>
+            </p>
+            <input class="send" value="0"  type="hidden" />
+            <!--<button class="send " data-counter="0">&#10004;</button>-->
+        </div>
+        <div style="text-align:center;clear:both"></div>
+        <div style="margin: 0 auto;">
+            <p style="font-size: 18px ; font-weight: bold">Healthiest</p>
+            <ul class="select_food">
+                {volist name='l_list' id='vo'}
+                <li  data-id="{:$vo.foodId}" class="item" data-name="{:$vo.foodName}" ><img src="/{:$vo.picpath}"/></li>
+                {/volist}
+                <div class="clearfix"></div>
+            </ul>
+        </div>
+        <div style="margin: 0 auto;">
+            <p style="font-size: 18px ; font-weight: bold">Healthy</p>
+            <ul class="select_food" >
+                {volist name='y_list' id='vo'}
+                <li data-id="{:$vo.foodId}" class="item" data-name="{:$vo.foodName}"><img src="/{:$vo.picpath}"/></li>
+                {/volist}
+                <div class="clearfix"></div>
+            </ul>
+        </div>
+        <div>
+            <button type="button" id="select" class="am-btn am-btn-primary am-radius">OK</button>
+            <!--<button type="button" class="am-btn  am-btn-warning  am-radius">Cancel</button>-->
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="script"}
+<script>
+
+    // $(".item").click(function(){
+    //     var ids = [] ;
+    //     $(".selected").each(function(i,v){
+    //         ids[i] = $(this).data('id');
+    //     });
+    //
+    //     if(ids.length > 1){
+    //         layer.msg('Can not choose more than two 1111');
+    //         return false;
+    //     }
+    // });
+
+    $("#select").click(function(){
+        var ids = [],strid = ' ' ,foodname = ' ' ;
+        $(".selected").each(function(i,v){
+            // ids[i] = $(this).data('id');
+            if(i == 0) {
+                strid = $(this).data('id');
+                foodname = $(this).data('name');
+            }else{
+                strid =  $(this).data('id')+','+strid;
+                foodname =  $(this).data('name')+','+foodname;
+            }
+        });
+
+        if($('li.selected').length == 0 ){
+            layer.msg('You did not choose any food you want.', {
+                time: 0 //不自动关闭
+                ,btn: ['ok']
+                ,yes: function(index){
+                    setTimeout(window.location.href = '/health', 3000);
+                    layer.close(index);
+                }
+            });
+            return false;
+        }
+
+        $.post(
+            "{:url('index/user/plan_eat')}",
+            {strid:strid},
+            function(result){
+                // layer.msg(result.msg);
+                if(result.code == 20){
+                    if(result.data == 0){
+                        $.post( "{:url('index/user/sendEmail')}",{foodname:foodname},function(){});
+                        //There is an email will be sent to your parents
+                        // layer.alert('The details of your choosing has sent to your parents by email.', {icon: 6});
+                        layer.msg('The details of your choosing has sent to your parents by email.', {
+                            time: 0 //不自动关闭
+                            ,btn: ['ok']
+                            ,yes: function(index){
+                                layer.close(index);
+                                setTimeout(window.location.href = '/health', 3000);
+                            }
+                        });
+                        // layer.alert('You got some points in this times ', {icon: 6});
+                    }else{
+                        // layer.alert('Prefer Job ', {icon: 6});
+                        layer.msg('Prefer Job', {
+                            time: 0 //不自动关闭
+                            ,btn: ['ok']
+                            ,yes: function(index){
+                                layer.close(index);
+                                setTimeout(window.location.href = '/health', 3000);
+                            }
+                        });
+                    }
+                    // setTimeout( window.location.href='/health' , 3000);
+                    return false;
+
+                }
+            });
+        console.log(ids);
+    })
+
+</script>
+<script src="/assets/js/selectfood.js"></script>
+{/block}

@@ -1,0 +1,100 @@
+{extend name="layout/base" }
+{block name="style"}
+<link href="/assets/css/user.css" rel="stylesheet">
+{/block}
+{block name="content-body"}
+
+<div class="detail">
+    <div class="am-g am-g-fixed">
+        <div class="am-u-lg-9 br_tp_g am-padding-horizontal-xs">
+
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg">
+
+                <div class="am-container am-padding-horizontal-0">
+                    <ol class="am-breadcrumb br_bt am-margin-bottom-0">
+                        <li><a href="#" class="">Health Center</a></li>
+                        <li><a href="#" class="">Member manage</a></li>
+                    </ol>
+                </div>
+
+                <div class="am-container am-padding-horizontal-sm am-padding-vertical-sm">
+                    <div class="am-u-lg-2 am-list-thumb am-padding-horizontal-0">
+                        <a href="#" class="">
+                            {if condition="$user_info['sex'] eq 0"}
+                                <img src="/assets/image/timg.jpg" class="am-img-responsive am-hide-sm-only" alt="">
+                            {else /}
+                                <img src="/assets/image/ftimg.jpg" class="am-img-responsive am-hide-sm-only" alt="">
+                            {/if}
+                        </a>
+                    </div>
+                    <div class=" am-u-lg-10 am-list-main ">
+                        <h2 class="font_black no_bold br_bt am-padding-bottom-xs am-margin-bottom-0">User Name：{:$user_info.user_name}
+                            <span class="am-text-sm am-margin-left-sm" style="float: right;"><a href="{:url('/logout')}" class="font_orange">Logout</a></span>
+                        </h2>
+                        <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
+                            <li class="font_green am-padding-vertical-sm">Email：<a>{:$user_info['email']}</a></li>
+                            <li class="font_green am-padding-vertical-sm">Sex：<a>{if condition="$user_info['sex'] eq 0"}Boy{else /}Girl {/if}</a></li>
+                            <li class="font_green am-padding-vertical-xs">Point：<a>{:$user_info['point']}</a></li>
+                            <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
+                            <li class="font_green am-padding-vertical-xs">Current Leve：{if condition="$level['level'] neq 0"}<img src="/assets/image/{:$level['level']}.png">{else /} -- {/if}</li>
+                            <li class="font_green am-padding-vertical-xs">You need {:$level['needpoints']} points to next level：<img src="/assets/image/{:$level['level']+1}.png"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top" style="display: none;">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">
+                    <h1 class="am-titlebar-title" style="color:#0e90d2">My Trip
+                    </h1>
+                </div>
+                <div class="am-container am-margin-top-sm">
+                    <table class="am-table am-table-bordered am-table-striped">
+                        <thead>
+                        <tr class="am-primary">
+                            <th class="am-text-center">Trip Date</th>
+                            <th class="am-text-center">Trip Time</th>
+                            <th class="am-text-center">Weather</th>
+                            <th class="am-text-center">Park Name</th>
+                            <th class="am-text-center">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {if condition ="count($list) eq 0 "}
+                            <tr><td class="am-text-center" colspan="4">none</td></tr>
+                            {else/}
+                                {volist name='list' id='vo'}
+                                    <tr>
+                                        <td class="am-text-center">{:$vo.date}</td>
+                                        <td class="am-text-center">{:$vo.startTime}-{:$vo.endTime}</td>
+                                        <td class="am-text-center">{:$vo.weather}</td>
+                                        <td class="am-text-center"><a href="{:url('index/index/go_trip',['ky'=>$vo['parkName']])}" target="_blank" >{:$vo.parkName}</a></td>
+                                        <td class="am-text-center">
+                                            {switch vo.status}
+                                            {case '0'}<span style="color: indianred">In Progress</span>{/case}
+                                            {case 2}<span style="color: green">Finished</span>{/case}
+                                            {case 3}<span style="color: saddlebrown">Cancelled</span>{/case}
+                                            {/switch}
+                                        </td>
+                                    </tr>
+                                {/volist}
+                            {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="am-u-lg-3 am-padding-right-0">
+            {include file="user/rightmenu" /}
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+
+</script>
+{/block}

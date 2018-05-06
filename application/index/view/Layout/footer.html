@@ -1,0 +1,44 @@
+<footer class="footer">
+    <p>
+        Copyright © Your Website 2018
+    </p>
+</footer>
+
+
+<script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/js/layer/layer.js"></script>
+<script type="text/javascript" src="/assets/js/action.js"></script>
+<script type="text/javascript" src="/assets/js/common.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+<script>
+    var demo = {
+        notice: function(){
+            // alert($(this).data('src'));
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '1200px;'
+                ,shade: 0.8
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,resize: false
+                ,content: '<img src="'+$(this).data('src')+'" width="100%">'
+                ,btn: [ 'Close']
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,success: function(layero){
+                    var btn = layero.find('.layui-layer-btn');
+
+                }
+            });
+        }
+
+    };
+
+    $('.layui-btn').on('click', function(){
+        var othis = $(this), method = othis.attr('method');
+        var demo1 = $('#demo1'), p = demo1.find('p').eq(othis.index());
+        demo[method] ? demo[method].call(this, othis) : new Function('that', p.html())(this);
+    });
+</script>

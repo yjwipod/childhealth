@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Fit-Kidz </title>
+    <link href="http://www.fit-kidz.tk/Content/css?v=NsOsgcHDfLRAbZuU4oCzQbyD9SbensKYjptfaY6TUwY1" rel="stylesheet"/>
+
+    <script src="http://www.fit-kidz.tk/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Fit-Kidz</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/Home/About">About</a></li>
+                <li><a href="/Home/Contact">Contact</a></li>
+                <li><a href="/FoodRanking">Food Ranking</a></li>
+                <li><a href="/ParkFinding">Park Finding</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Account/Register" id="registerLink">Register</a></li>
+                <li><a href="/Account/Login" id="loginLink">Log in</a></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+
+
+
+    <h2>Finding Park Nearby</h2>
+    <div id="findparks">
+        Find Parks in
+    </div>
+
+    <div id="locationField">
+        <input id="autocomplete" placeholder="Enter a Suburb" type="text" />
+    </div>
+
+
+    <div id="map" style="width: 800px; height: 500px;"></div>
+
+    <div id="listing">
+        <table id="resultsTable">
+            <tbody id="results"></tbody>
+        </table>
+    </div>
+
+
+    <div style="display: none">
+        <div id="info-content">
+            <table>
+                <tr id="iw-url-row" class="iw_table_row">
+                    <td id="iw-icon" class="iw_table_icon"></td>
+                    <td id="iw-url"></td>
+                </tr>
+                <tr id="iw-address-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Address:</td>
+                    <td id="iw-address"></td>
+                </tr>
+                <tr id="iw-phone-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Telephone:</td>
+                    <td id="iw-phone"></td>
+                </tr>
+                <tr id="iw-rating-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Rating:</td>
+                    <td id="iw-rating"></td>
+                </tr>
+                <tr id="iw-website-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Website:</td>
+                    <td id="iw-website"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <hr />
+    <footer>
+        <p>&copy; 2018 - Fit-Kidz</p>
+    </footer>
+</div>
+
+<script src="http://www.fit-kidz.tk/bundles/jquery?v=DHJjXNF7rtNY6oDw_K9yCVUFyYGki-Mcja1k-1hKSbo1"></script>
+
+<script src="http://www.fit-kidz.tk/bundles/bootstrap?v=3sMMkHOoRNp-NJC3NrZxEw-RErUEY5a8VSP_wl4V4QA1"></script>
+
+
+<script src="/assets/js/googleMap.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ1a6pBb8VCtQ80jZcPOoaDvEFZ8VXD-s&libraries=places"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+{extend name="layout/base" }
+{block name="style"}
+<style>
+    @charset "utf-8";
+    .nolsy{ list-style:none;}
+
+    .br_lf{ border-left:1px solid #e5e5e5;}
+    .br_rg{ border-right:1px solid #e5e5e5;}
+    .br_bt{ border-bottom:1px solid #e5e5e5;}
+    .br_tp{border-top: 1px solid #e5e5e5;}
+
+    .br_lf_g{border-left:2px solid #058CEB;}
+    .br_rg_g{ border-right:2px solid #058CEB;}
+    .br_bt_g{ border-bottom:2px solid #058CEB;}
+    .br_tp_g{border-top: 2px solid #058CEB;}
+
+    .br_lf_w{border-left:2px solid #fff;}
+    .br_rg_w{ border-right:2px solid #fff;}
+    .br_bt_w{ border-bottom:2px solid #fff;}
+    .br_tp_w{border-top: 2px solid #fff;}
+
+    .no_br{border:0;}
+    .no_bold{font-weight:normal;}
+
+    .bg_orange{ background: #ffa200;}
+    .bg_green{background:#058CEB;}
+    .bg_grey{background:#f1f1f1;}
+
+    .font_black{color:#333;}
+    .font_orange{color:#ffa200;}
+    .font_green{color:#0e90d2;}
+    .font_grey{color:#959595;}
+    .font_white{color:#fff;}
+
+    .font_bold{font-weight: bold;}
+    .font_normal{ font-weight: normal;}
+</style>
+
+{/block}
+{block name="content-body"}
+
+<div class="detail">
+    <div class="am-g am-g-fixed">
+        <div class="am-u-lg-9 br_tp_g am-padding-horizontal-xs">
+
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg">
+
+                <div class="am-container am-padding-horizontal-0">
+                    <ol class="am-breadcrumb br_bt am-margin-bottom-0">
+                        <li><a href="#" class="">Health Center</a></li>
+                        <li><a href="#" class="">Member manage</a></li>
+                    </ol>
+                </div>
+
+                <div class="am-container am-padding-horizontal-sm am-padding-vertical-sm">
+                    <div class="am-u-lg-2 am-list-thumb am-padding-horizontal-0">
+                        <a href="#" class="">
+                            {if condition="$user_info['sex'] eq 0"}
+                                <img src="/assets/image/timg.jpg" class="am-img-responsive am-hide-sm-only" alt="">
+                            {else /}
+                                <img src="/assets/image/ftimg.jpg" class="am-img-responsive am-hide-sm-only" alt="">
+                            {/if}
+                        </a>
+                    </div>
+                    <div class=" am-u-lg-10 am-list-main ">
+                        <h2 class="font_black no_bold br_bt am-padding-bottom-xs am-margin-bottom-0">User Name：{:$user_info.user_name}
+                            <span class="am-text-sm am-margin-left-sm" style="float: right;"><a href="{:url('/logout')}" class="font_orange">Logout</a></span>
+                        </h2>
+                        <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
+                            <li class="font_green am-padding-vertical-sm">Email：<a>{:$user_info['email']}</a></li>
+                            <li class="font_green am-padding-vertical-sm">Sex：<a>{if condition="$user_info['sex'] eq 0"}Boy{else /}Girl {/if}</a></li>
+                            <li class="font_green am-padding-vertical-xs">Point：<a>0</a></li>
+                            <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">
+                    <h1 class="am-titlebar-title" style="color:#0e90d2">My Trip
+                    </h1>
+                </div>
+                <div class="am-container am-margin-top-sm">
+                    <table class="am-table am-table-bordered am-table-striped">
+                        <thead>
+                        <tr class="am-primary">
+                            <th class="am-text-center">Start Time</th>
+                            <th class="am-text-center">Tirp line</th>
+                            <th class="am-text-center">End time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="am-u-lg-3 am-padding-right-0">
+            <div class="am-container br_lf br_rg br_bt br_tp_g am-text-center am-padding-sm">
+
+                <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
+                <p class="am-margin-vertical-xs"><a href="{:url('/user/'.$user_id)}">Home </a></p>
+                <p class="am-margin-vertical-xs"><a href="{:url('/index/user/point_logs'.$user_id)}">Point Log </a></p>
+                <p class="am-margin-vertical-xs"><a href="{:url('/logout')}">Logout</a></p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+
+</script>
+{/block}

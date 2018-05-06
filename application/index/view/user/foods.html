@@ -1,0 +1,81 @@
+{extend name="layout/base" }
+{block name="style"}
+<link href="/assets/css/user.css" rel="stylesheet">
+<style>
+    table tr {
+        margin-bottom: 10px;
+        line-height: 50px;
+    }
+</style>
+{/block}
+{block name="content-body"}
+
+<div class="detail">
+    <div class="am-g am-g-fixed">
+
+        <div class="am-u-lg-9 br_tp_g am-padding-horizontal-xs">
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg">
+                <div class="am-container am-padding-horizontal-0">
+                    <ol class="am-breadcrumb br_bt">
+                        <li><a href="#" class="">Health Center</a></li>
+                        <li><a href="#" class="">Food list</a></li>
+                    </ol>
+                </div>
+
+
+                <div class="clear"></div>
+                <div style="width:785px;margin:1em auto;" class="fr">
+                    <div>
+                    <a class="am-btn am-btn-primary" href="{:url('index/user/food_manage')}" style="float: right" >Add Food</a>
+                        <div style="clear: both"></div>
+                    </div>
+                    <table class="am-table am-table-bordered am-table-striped am-table-hover">
+                        <thead>
+                        <tr>
+                            <th>Food Name</th>
+                            <th>HealthyLevel</th>
+                            <th>Protein</th>
+                            <th>Fat</th>
+                            <th>Fiber</th>
+                            <th>Sugar</th>
+                            <th>Handle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {volist name='lists' id='vo'}
+                            <tr>
+                                <td>{:$vo.foodName}</td>
+                                <td>{:$healthyLevel[$vo.healthyLevel]}</td>
+                                <td>{:$vo.protein}</td>
+                                <td>{:$vo.fat}</td>
+                                <td>{:$vo.fiber}</td>
+                                <td>{:$vo.sugar}</td>
+                                <td>
+                                    <a href="{:url('index/user/food_manage',['foodId'=>$vo['foodId']])}">Edit</a> |
+                                    <a href="{:url('index/user/food_del',['foodId'=>$vo['foodId']])}">Del</a>
+                                </td>
+                            </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+
+                    {:$lists->render()}
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="am-u-lg-3 am-padding-right-0">
+            <div class="am-container br_lf br_rg br_bt br_tp_g am-text-center am-padding-sm">
+                {include file="user/rightmenu" /}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+
+</script>
+{/block}
